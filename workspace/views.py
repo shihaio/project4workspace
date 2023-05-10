@@ -34,6 +34,7 @@ class RegisterUsersView(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         password = request.data.get("password", "")
         email = request.data.get("email", "")
+        profileURL = request.data.get("profileURL", "")
         if not password or not email:
             return Response(
                 data={
@@ -42,7 +43,7 @@ class RegisterUsersView(generics.ListCreateAPIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
         new_user = User.objects.create_user(
-            password=password, email=email
+            password=password, email=email, profileURL=profileURL
         )
         return Response(status=status.HTTP_201_CREATED)
 
@@ -113,18 +114,18 @@ def ViewTaskToMe(request, pk):
     view_list = list(allTasksOfThatPIC)
     return JsonResponse(view_list, safe=False)
 
-# Read Completed Tasks
+# Read ViewTaskApproved Tasks
 
-def ViewTaskCompleted(request):
-    completedTasks = Task.objects.filter(status="COMPLETED")
-    completedTasksValue= completedTasks.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
-    view_list = list(completedTasksValue)
+def ViewTaskApproved(request):
+    approvedTasks = Task.objects.filter(status="APPROVED")
+    approvedTasksValue= approvedTasks.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
+    view_list = list(approvedTasksValue)
     return JsonResponse(view_list, safe=False)
 
 # Read Tasks assign to me 
 
 def ViewTaskToMe(request, pk):
-    task = Task.objects.filter(tasked_to_id=pk).exclude(status="COMPLETED")
+    task = Task.objects.filter(tasked_to_id=pk).exclude(status="APPROVED")
     allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(allTasksOfThatPIC)
     return JsonResponse(view_list, safe=False)
@@ -132,7 +133,7 @@ def ViewTaskToMe(request, pk):
 # Read Tasks I create
 
 def ViewTaskCreated(request, pk):
-    taskCreated = Task.objects.filter(created_by_id=pk).exclude(status="COMPLETED")
+    taskCreated = Task.objects.filter(created_by_id=pk).exclude(status="APPROVED")
     showTasksCreated = taskCreated.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
     view_tasks_list = list(showTasksCreated)
     return JsonResponse(view_tasks_list, safe=False)
@@ -156,6 +157,12 @@ def ViewOneUser(request, pk):
         "birthday": viewOneUser.birthday,
         "user_created_date": viewOneUser.user_created_date,
     })
+
+# Read Email List Exclude Email of Owner
+def ViewEmailList(request, pk):
+    emails = User.objects.exclude(id=pk).values('email')
+    view_list = list(emails)
+    return JsonResponse(view_list, safe=False)
 
 # Delete Task
 def DeleteOneTask (request, pk):

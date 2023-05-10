@@ -12,10 +12,11 @@ urlpatterns = [
   path('api/v1/task/read/<int:pk>', views.ViewTask, name="viewTask"),
   path('api/v1/task/<int:pk>', views.NewTaskUpdate, name="taskUpdate"),
   path('api/v1/task/pic/<int:pk>', views.ViewTaskToMe, name="viewTaskToMe"),
-  path('api/v1/task/completed', views.ViewTaskCompleted, name="viewTaskToMe"),
+  path('api/v1/task/approved', views.ViewTaskApproved, name="ViewTaskApproved"),
   path('api/v1/task/createdBy/<int:pk>', views.ViewTaskCreated, name="viewTaskCreated"),
   path('api/v1/task/delete/<int:pk>', views.DeleteOneTask, name="deleteOneTask"),
   path('api/v1/user/read/<int:pk>', views.ViewOneUser, name="viewOneUser"),
+  path('api/v1/user/emailList/<int:pk>', views.ViewEmailList, name="viewEmailList"),
   # Authentication
   # path('api/v1/auth/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
   path('api/v1/auth/token/', CustomObtainTokenPairView.as_view(), name='token_obtain_pair'),
