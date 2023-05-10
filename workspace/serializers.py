@@ -47,6 +47,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     token['user_id'] = str(user.id)
     token['profileURL'] = user.profileURL
     token['role'] = user.role
+    token ['isAdmin'] = user.isAdmin
     return token
 
 class CustomObtainTokenPairView(TokenObtainPairView):

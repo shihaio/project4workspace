@@ -24,7 +24,7 @@ from django.contrib.auth import authenticate, login
 # JWT settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
-# AUTHENTICATE
+# REGISTER
 class RegisterUsersView(generics.ListCreateAPIView):
     """
     POST user/signup/
@@ -62,13 +62,9 @@ class BlacklistTokenView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-#  READ USERLIST
-class UserList (generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
 
 
+# UPDATE TASK
 def NewTaskUpdate(request, pk):
     #find that task inside database, find by id
     targetTask = Task.objects.get(id=pk)
@@ -129,7 +125,7 @@ def ViewTaskToMe(request, pk):
     view_list = list(allTasksOfThatPIC)
     return JsonResponse(view_list, safe=False)
 
-# Read Tasks assign to me 
+# Read Completed Tasks
 
 def ViewTaskCompleted(request):
     completedTasks = Task.objects.filter(status="COMPLETED")
@@ -181,10 +177,10 @@ def ViewOneUser(request, pk):
     })
     # return JsonResponse(model_to_dict(viewOneUser))
 # READ 1 USER
-class ReadUserDetail (generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+# class ReadUserDetail (generics.RetrieveUpdateDestroyAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     # permission_classes = (permissions.IsAuthenticated,)
 
 # Delete Route
 def DeleteOneTask (request, pk):
@@ -192,8 +188,19 @@ def DeleteOneTask (request, pk):
     return JsonResponse({"Status":"Task is successfully deleted."})
 
 
-# # serialize 1 class instance
-# def artist_detail2(request,pk):
-#   artist = Artist.objects.get(id=pk)
-#   print(type(artist))
-#   return JsonResponse(model_to_dict(artist))
+#  READ USERLIST 
+
+
+def UserList(request):
+    readUsers= User.objects.values('id', 'email', 'role')
+    view_list = list(readUsers)
+    return JsonResponse(view_list, safe=False)
+
+#  READ TASKLIST
+def TaskList(request):
+    tasks = Task.objects.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
+    view_list = list(tasks)
+    return JsonResponse(view_list, safe=False)
+
+
+
