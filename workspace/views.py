@@ -135,8 +135,6 @@ def ViewTaskCompleted(request):
     view_list = list(completedTasksValue)
     return JsonResponse(view_list, safe=False)
 
-
-
 # Read Tasks assign to me 
 
 def ViewTaskToMe(request, pk):
@@ -183,15 +181,17 @@ def ViewOneUser(request, pk):
 #     serializer_class = UserSerializer
 #     # permission_classes = (permissions.IsAuthenticated,)
 
-# Delete Route
+# Delete Task
 def DeleteOneTask (request, pk):
     Task.objects.get(id=pk).delete()
     return JsonResponse({"Status":"Task is successfully deleted."})
 
+# Delete User
+def DeleteOneUser (request, pk):
+    User.objects.get(id=pk).delete()
+    return JsonResponse({"Status":"User is successfully deleted."})
 
 #  READ USERLIST 
-
-
 def UserList(request):
     readUsers= User.objects.values(     
       "id",
@@ -210,6 +210,3 @@ def TaskList(request):
     tasks = Task.objects.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(tasks)
     return JsonResponse(view_list, safe=False)
-
-
-

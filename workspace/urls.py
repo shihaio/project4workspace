@@ -25,6 +25,5 @@ urlpatterns = [
   # For Admin
   path('api/v1/users', views.UserList, name="user_list"),
   path('api/v1/tasks', views.TaskList, name="task_list"),
-  # path('api/v1/user/<int:pk>/delete', views.user_edit.as_view(), name="user_delete"),
-
+  path('api/v1/user/delete/<int:pk>', views.DeleteOneUser, name="deleteOneUser"),
 ]
