@@ -193,7 +193,15 @@ def DeleteOneTask (request, pk):
 
 
 def UserList(request):
-    readUsers= User.objects.values('id', 'email', 'role')
+    readUsers= User.objects.values(     
+      "id",
+      "username",
+      "email",
+      "password",
+      "profileURL",
+      "role",
+      "birthday",
+      "user_created_date", )
     view_list = list(readUsers)
     return JsonResponse(view_list, safe=False)
 
