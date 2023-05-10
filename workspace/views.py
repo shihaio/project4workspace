@@ -68,14 +68,15 @@ class BlacklistTokenView(APIView):
 def NewTaskUpdate(request, pk):
     #find that task inside database, find by id
     targetTask = Task.objects.get(id=pk)
+    # print(" ================> pk is:", pk)
     # decode request.body, to access what user send backend
     body_unicode = request.body.decode("utf-8")
     body = json.loads(body_unicode)
-    print("===========================> body", body)
+    # print("===========================> body", body)
 
     #Find Person, bring them to the save
     personInCharge = User.objects.get(email=body["tasked_to_id"])
-    personCreatedTask = User.objects.get(id=body["created_by_id"])
+    personCreatedTask = User.objects.get(email=body["tasked_to_id"])
 
     # start to update Task:
     targetTask.task_name = body["task_name"]
