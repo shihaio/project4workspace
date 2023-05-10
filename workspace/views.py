@@ -26,9 +26,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 # REGISTER
 class RegisterUsersView(generics.ListCreateAPIView):
-    """
-    POST user/signup/
-    """
+
     permission_classes = (permissions.AllowAny,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -88,7 +86,6 @@ def NewTaskUpdate(request, pk):
 
     targetTask.save()
     return JsonResponse(model_to_dict(targetTask))
-
      
 # CREATE TASK
 
@@ -101,26 +98,16 @@ def TaskCreateNew(request):
     # finding person
     personInCharge = User.objects.get(email=body["tasked_to_id"])
     personCreatedTask = User.objects.get(id=body["created_by_id"])
-    # post = request.POST.copy()
-    # post["tasked_to_id"] = personInChargeId
-    # request.POST = post
     body["tasked_to_id"] = personInCharge
     body["created_by_id"] = personCreatedTask
     
     data = Task.objects.create(**body)
-    # if request.method == "POST":
-    #     form = TaskForm(body)
-    #     if form.is_valid():
-    #         newTask = form.save()
-    #         return JsonResponse({"result":{"id":newTask.id,"task_name":newTask.task_name}})
-    # else:
-    #     form = TaskForm()
+
     return JsonResponse(model_to_dict(data))
 
 # Read Tasks assign to me 
 
 def ViewTaskToMe(request, pk):
-    print("==========================>request.user", request.user)
     task = Task.objects.filter(tasked_to_id=pk)
     allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(allTasksOfThatPIC)
@@ -130,7 +117,6 @@ def ViewTaskToMe(request, pk):
 
 def ViewTaskCompleted(request):
     completedTasks = Task.objects.filter(status="COMPLETED")
-    print("completedTasks is: ======================>", completedTasks)
     completedTasksValue= completedTasks.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(completedTasksValue)
     return JsonResponse(view_list, safe=False)
@@ -138,8 +124,7 @@ def ViewTaskCompleted(request):
 # Read Tasks assign to me 
 
 def ViewTaskToMe(request, pk):
-    print("==========================>request.user", request.user)
-    task = Task.objects.filter(tasked_to_id=pk)
+    task = Task.objects.filter(tasked_to_id=pk).exclude(status="COMPLETED")
     allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(allTasksOfThatPIC)
     return JsonResponse(view_list, safe=False)
@@ -147,8 +132,7 @@ def ViewTaskToMe(request, pk):
 # Read Tasks I create
 
 def ViewTaskCreated(request, pk):
-    print("==========================>request.user", request.user)
-    taskCreated = Task.objects.filter(created_by_id=pk)
+    taskCreated = Task.objects.filter(created_by_id=pk).exclude(status="COMPLETED")
     showTasksCreated = taskCreated.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
     view_tasks_list = list(showTasksCreated)
     return JsonResponse(view_tasks_list, safe=False)
@@ -171,15 +155,7 @@ def ViewOneUser(request, pk):
         "role": viewOneUser.role,
         "birthday": viewOneUser.birthday,
         "user_created_date": viewOneUser.user_created_date,
-        # "tasks_creator": viewOneUser.tasks_creator,
-        # "tasks_assignedto": viewOneUser.tasks_assignedto,
     })
-    # return JsonResponse(model_to_dict(viewOneUser))
-# READ 1 USER
-# class ReadUserDetail (generics.RetrieveUpdateDestroyAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     # permission_classes = (permissions.IsAuthenticated,)
 
 # Delete Task
 def DeleteOneTask (request, pk):
