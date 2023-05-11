@@ -193,3 +193,4 @@ def TaskList(request):
     tasks = Task.objects.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
     view_list = list(tasks)
     return JsonResponse(view_list, safe=False)
+

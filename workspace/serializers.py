@@ -8,12 +8,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     model = User
     fields = (
       "id",
-      "username",
+      # "username",
       "email",
       "password",
       "profileURL",
       "role",
-      "birthday",
+      # "birthday",
       "user_created_date",
       # "tasks_creator",
       # "tasks_assignedto"
