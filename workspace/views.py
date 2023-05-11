@@ -75,7 +75,7 @@ def NewTaskUpdate(request, pk):
 
     #Find Person, bring them to the save
     personInCharge = User.objects.get(email=body["tasked_to_id"])
-    personCreatedTask = User.objects.get(email=body["tasked_to_id"])
+    personCreatedTask = User.objects.get(email=body["created_by_id"])
 
     # start to update Task:
     targetTask.task_name = body["task_name"]

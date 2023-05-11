@@ -40,7 +40,6 @@ from django.utils.translation import gettext_lazy as _
 class User (models.Model):
     username = models.CharField(max_length=50,null=True)
     email = models.EmailField(verbose_name="email", max_length=50, unique=True)
-    # email, maybe i can use EmailField()
     password = models.CharField(max_length=10)
     profileURL = models.CharField(max_length=100,null=True)
     role = models.CharField(max_length=50)
