@@ -110,8 +110,8 @@ def TaskCreateNew(request):
 
 def ViewTaskToMe(request, pk):
     task = Task.objects.filter(tasked_to_id=pk)
-    allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
-    view_list = list(allTasksOfThatPIC)
+    tasksToPersonInCharge = task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
+    view_list = list(tasksToPersonInCharge)
     return JsonResponse(view_list, safe=False)
 
 # Read ViewTaskApproved Tasks
