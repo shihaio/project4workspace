@@ -108,11 +108,11 @@ def TaskCreateNew(request):
 
 # Read Tasks assign to me 
 
-def ViewTaskToMe(request, pk):
-    task = Task.objects.filter(tasked_to_id=pk)
-    tasksToPersonInCharge = task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
-    view_list = list(tasksToPersonInCharge)
-    return JsonResponse(view_list, safe=False)
+# def ViewTaskToMe(request, pk):
+#     task = Task.objects.filter(tasked_to_id=pk)
+#     allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
+#     view_list = list(allTasksOfThatPIC)
+#     return JsonResponse(view_list, safe=False)
 
 # Read ViewTaskApproved Tasks
 
@@ -126,8 +126,8 @@ def ViewTaskApproved(request):
 
 def ViewTaskToMe(request, pk):
     task = Task.objects.filter(tasked_to_id=pk).exclude(status="APPROVED")
-    allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
-    view_list = list(allTasksOfThatPIC)
+    tasksToPersonInCharge = task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
+    view_list = list(tasksToPersonInCharge)
     return JsonResponse(view_list, safe=False)
 
 # Read Tasks I create
