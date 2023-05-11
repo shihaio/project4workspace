@@ -15,8 +15,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
       "role",
       "birthday",
       "user_created_date",
-      # "tasks_creator",
-      # "tasks_assignedto"
     )
     depth = 1
 

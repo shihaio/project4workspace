@@ -106,14 +106,6 @@ def TaskCreateNew(request):
 
     return JsonResponse(model_to_dict(data))
 
-# Read Tasks assign to me 
-
-# def ViewTaskToMe(request, pk):
-#     task = Task.objects.filter(tasked_to_id=pk)
-#     allTasksOfThatPIC= task.values('id', 'task_name', 'status', 'description','taskImgURL','created_by_id','tasked_to_id')
-#     view_list = list(allTasksOfThatPIC)
-#     return JsonResponse(view_list, safe=False)
-
 # Read ViewTaskApproved Tasks
 
 def ViewTaskApproved(request):
@@ -157,6 +149,17 @@ def ViewOneUser(request, pk):
         "birthday": viewOneUser.birthday,
         "user_created_date": viewOneUser.user_created_date,
     })
+
+# Update One User Information
+def UpdateOneUser(request, pk):
+    targetUser = User.objects.get(id=pk)
+
+    body_unicode = request.body.decode("utf-8")
+    body = json.loads(body_unicode)
+    targetUser.profileURL = body["profileURL"]
+    targetUser.role = body["role"]
+    targetUser.save()
+    return JsonResponse(model_to_dict(targetUser))
 
 # Read Email List Exclude Email of Owner
 def ViewEmailList(request, pk):
