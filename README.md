@@ -1,9 +1,11 @@
 **Project Title: Workspace**
 
 **About Workspace**
+
 Workspace is a collaboration tool that helps you manage your team tasks. It monitors task status (in cards) and notifies its users if the task is completed or not. Target audience of this software is for any businesses that want to improve their work processes. 
 
 **Key Functions**
+
 - Create a task and assign it to anyone in the team.
 - Review a task before closing it.
 - Record completed tasks in inventory.
@@ -11,8 +13,8 @@ Workspace is a collaboration tool that helps you manage your team tasks. It moni
 
 **Link:**
 
-Wireframe: https://www.figma.com/file/GkITCAijKL3J577kkvLGkl/Todo?type=design&node-id=0-1&t=rjf2uOnl8fQqHBTO-0
-API Route: https://docs.google.com/presentation/d/1pjfMWQeWD3FHkn-qmMAV3v5xFSPKerojmbvHyMj8bmE/edit?usp=sharing
+- Wireframe: https://www.figma.com/file/GkITCAijKL3J577kkvLGkl/Todo?type=design&node-id=0-1&t=rjf2uOnl8fQqHBTO-0
+- API Route: https://docs.google.com/presentation/d/1pjfMWQeWD3FHkn-qmMAV3v5xFSPKerojmbvHyMj8bmE/edit?usp=sharing
 
 **Technologies Used**
 - Boostrap CSS
