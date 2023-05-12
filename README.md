@@ -1,33 +1,34 @@
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+**Project Title: Workspace**
 
-Past failed codes:
-Views
-# def ViewUserTask(request, pk):
-#     pic= User.objects.filter(id=1).first()
-#     tasksOfPIC = pic.tasks_assignedto.all()
-#     print("========================> tasksOfPIC", tasksOfPIC)	
-#     task = Task.objects.filter(tasked_to_id=pk)
-#     #print("========================>", task)
-#     tasks= task.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
-#     view_list = list(tasks)
-#     #print("========================>", view_list)
-#     return JsonResponse(view_list, safe=False)
+About Workspace
+Workspace is a collaboration tool that helps you manage your team tasks. It monitors task status (in cards) and notifies its users if the task is completed or not. Target audience of this software is for any businesses that want to improve their work processes. 
 
-# def ViewUserTask(request, pk):
+**Key Functions**
+Create a task and assign it to anyone in the team.
+Review a task before closing it.
+Record completed tasks in inventory.
 
-#     pic= User.objects.filter(id=1).first()
-#     tasksOfPIC = pic.tasks_assignedto.all()
-#     print("========================> tasksOfPIC", tasksOfPIC)	
-#     print("========================>", pk)
 
-#     task = Task.objects.filter(tasked_to_id=pk)
-#     #print("========================>", task)
-#     tasks= tasksOfPIC.values('id', 'task_name', 'status','description','taskImgURL','created_by_id','tasked_to_id')
-#     view_list = list(tasks)
-#     #print("========================>", view_list)
-#     return JsonResponse(view_list, safe=False)
+**Link:**
+
+Wireframe: https://www.figma.com/file/GkITCAijKL3J577kkvLGkl/Todo?type=design&node-id=0-1&t=rjf2uOnl8fQqHBTO-0
+API Route: https://docs.google.com/presentation/d/1pjfMWQeWD3FHkn-qmMAV3v5xFSPKerojmbvHyMj8bmE/edit?usp=sharing
+
+**Technologies Used**
+Boostrap CSS
+Django Rest Framework
+HTML
+JavaScript
+Postgresql
+Python
+React
+
+**Additional feature for future development**
+Clock and reminder
+Performance management system (to evaluate task recipient)
+Involve more team members to work on a task
+
+**Challenges**
+Study material is insufficient. I looked for more learning resources of Django REST Framework from various resources like StackOverflow, Django Documentation, Youtube.
+We need to perform a few steps to transform data between frontend and backend. Python uses dict, Django uses models and React uses JSON.
+Creating a custom new user account rather than using Django own administrator page.
