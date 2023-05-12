@@ -33,6 +33,7 @@ class RegisterUsersView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         password = request.data.get("password", "")
+        
         email = request.data.get("email", "")
         profileURL = request.data.get("profileURL", "")
         if not password or not email:
