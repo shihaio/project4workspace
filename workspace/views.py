@@ -96,16 +96,16 @@ def TaskCreateNew(request):
     # Made changes here, added DICT befor GET method ===========>
     print("===========================>request.user:", request.user)
     body_unicode = request.body.decode("utf-8")
-    body = json.loads(body_unicode)
+    body = json.loads(body_unicode) 
     # finding person
     personInCharge = User.objects.get(email=body["tasked_to_id"])
     personCreatedTask = User.objects.get(id=body["created_by_id"])
     body["tasked_to_id"] = personInCharge
     body["created_by_id"] = personCreatedTask
-    
     data = Task.objects.create(**body)
 
     return JsonResponse(model_to_dict(data))
+
 
 # Read ViewTaskApproved Tasks
 
