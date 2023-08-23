@@ -10,11 +10,16 @@ Workspace is a collaboration tool that helps you manage your team tasks. It moni
 - Review a task before closing it.
 - Record completed tasks in inventory.
 
+**Demo Photo**
+![image](https://github.com/shihaio/project4workspace/assets/115003963/77c27e44-0ec9-41c7-99b6-376f2cf42f05)
+
+
 
 **Link:**
 
 - Wireframe: https://www.figma.com/file/GkITCAijKL3J577kkvLGkl/Todo?type=design&node-id=0-1&t=rjf2uOnl8fQqHBTO-0
 - API Route: https://docs.google.com/presentation/d/1pjfMWQeWD3FHkn-qmMAV3v5xFSPKerojmbvHyMj8bmE/edit?usp=sharing
+- Backend link: https://workspacebe2.onrender.com
 
 **Technologies Used**
 - Boostrap CSS
